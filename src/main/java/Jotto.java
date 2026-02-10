@@ -1,9 +1,14 @@
-import java.io.File;
+// java
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * @author Anthony Duenez Ramirez
+ * @description A simple implementation of the game Jotto.
+ * The game will read a list of words from a file and randomly
+ * select one for the player to guess. The player will then be
+ * able to make guesses and receive feedback on how many letters
+ * are correct. The player can also view the word list, their
+ * guesses, and the words that have been played.
  * @version 0.1.0
  * @Since 1/29/26
  **/
@@ -11,16 +16,15 @@ public class Jotto {
     private static final int WORD_SIZE = 5;
     private static final boolean DEBUG = true;
 
-    private final ArrayList<String> wordList;
-    private final ArrayList<String> playerGuesses;
-    private final ArrayList<String> playedWords;
+    private final ArrayList<String> wordList = new ArrayList<>();
+    private final ArrayList<String> playerGuesses = new ArrayList<>();
+    private final ArrayList<String> playedWords = new ArrayList<>();
     private String currentWord;
     private String filename;
     private int score;
 
     public Jotto(String filename) {
-        this.filename = filename;
-        readWords();
+        setFilename(filename);
     }
 
     public ArrayList<String> getWordList() {
@@ -59,59 +63,45 @@ public class Jotto {
         this.score = score;
     }
 
-    public ArrayList<String> readWords(){
-
+    public ArrayList<String> readWords() {
+        return new ArrayList<>();
     }
 
-    public void play(){
-
+    public void play() {
     }
 
-    public String showPlayedWords(){
-
+    public String showPlayedWords() {
+        return "";
     }
 
-    public String showWordList(){
-
+    public String showWordList() {
+        return "";
     }
 
-    public ArrayList<String> showPlayerGuesses(){
-
+    public ArrayList<String> showPlayerGuesses() {
+        return new ArrayList<>();
     }
 
-    protected int guess(){
-
+    protected int guess() {
+        return 0;
     }
 
-    public ArrayList<String> getPlayedWords(){
-
+    public int getLetterCount(String wordGuess) {
+        return 0;
     }
 
-    public String getCurrentWord(){
-
+    protected void updateWordList() {
     }
 
-    public int getLetterCount(String wordGuess){
-
+    public boolean pickWord() {
+        return false;
     }
 
-    protected void updateWordList(){
-
+    public boolean addPlayerGuess(String wordGuess) {
+        return false;
     }
 
-    public boolean pickWord(){
-
-    }
-
-    public int score(){
-        return getScore();
-    }
-
-    public boolean addPlayerGuess(String wordGuess){
-
-    }
-
-    protected void playerGuessScores(ArrayList<String> guesses){
+    protected void playerGuessScores(ArrayList<String> guesses) {
 
     }
 }
