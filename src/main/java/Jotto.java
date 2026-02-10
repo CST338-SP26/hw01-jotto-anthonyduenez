@@ -26,11 +26,16 @@ public class Jotto {
     private String filename;
     private int score;
 
+    /**
+     * Constructor for Jotto. Takes a filename as an argument and reads the words from the file.
+     * @param filename The name of the file containing the word list.
+     */
     public Jotto(String filename) {
         setFilename(filename);
         readWords();
     }
 
+    // Getters and setters
     public ArrayList<String> getWordList() {
         return wordList;
     }
@@ -67,6 +72,10 @@ public class Jotto {
         this.score = score;
     }
 
+    /**
+     * Reads the words from the file and adds them to the word list.
+     * @return The word list.
+     */
     public ArrayList<String> readWords() {
         File f = new File(filename);
         try {
@@ -84,6 +93,9 @@ public class Jotto {
         return wordList;
     }
 
+    /**
+     * The main game loop. The player will be able to choose from a menu of options and play the game.
+     */
     public void play() {
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -134,6 +146,10 @@ public class Jotto {
         }
     }
 
+    /**
+     * Shows the words that have been played. If no words have been played, it will return a message saying so.
+     * @return A string of the words that have been played or a message saying no words have been played.
+     */
     public String showPlayedWords() {
         if (playedWords.isEmpty()) {
             return "No words have been played.";
@@ -146,6 +162,10 @@ public class Jotto {
         return playedWordsString;
     }
 
+    /**
+     * Shows the word list. If the word list is empty, it will return a message saying so.
+     * @return A string of the word list or a message saying the word list is empty.
+     */
     public String showWordList() {
         String wordListString = "Current word list:\n";
         for (String word : wordList) {
@@ -154,6 +174,10 @@ public class Jotto {
         return wordListString;
     }
 
+    /**
+     * Shows the player's guesses. If the player has not made any guesses, it will return a message saying so.
+     * @return A string of the player's guesses or a message saying the player has not made any guesses.
+     */
     public ArrayList<String> showPlayerGuesses() {
         if (playerGuesses.isEmpty()) {
             System.out.println("No guesses yet");
@@ -173,6 +197,11 @@ public class Jotto {
         return playerGuesses;
     }
 
+    /**
+     * The main guessing loop. The player will be able to make guesses and receive feedback on how many letters are correct.
+     * The player can also choose to quit the game at any time.
+     * @return The player's score.
+     */
     protected int guess() {
         ArrayList<String> currentGuesses = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
@@ -214,6 +243,11 @@ public class Jotto {
         }
     }
 
+    /**
+     * Gets the number of letters in the player's guess that are in the current word. If the player's guess is the same as the current word, it will return 5.
+     * @param wordGuess The player's guess.
+     * @return The number of letters in the player's guess that are in the current word.
+     */
     public int getLetterCount(String wordGuess) {
         int count = 0;
         wordGuess = wordGuess.toLowerCase();
@@ -227,6 +261,9 @@ public class Jotto {
         return count;
     }
 
+    /**
+     * Updates the word list with the player's guesses. If the player's guess is not already in the word list, it will be added to the word list and written to the file.
+     */
     protected void updateWordList() {
         try (FileWriter writer = new FileWriter(getFilename())) {
             for (String guess : playerGuesses) {
@@ -242,6 +279,10 @@ public class Jotto {
         }
     }
 
+    /**
+     * Picks a random word from the word list and sets it as the current word. If the current word has already been played, it will pick another word until it finds one that hasn't been played. If all words have been played, it will return false.
+     * @return true if a new word was picked, false if all words have been played.
+     */
     public boolean pickWord() {
         final Random random = new Random();
         int index = random.nextInt(wordList.size());
@@ -259,6 +300,11 @@ public class Jotto {
         return true;
     }
 
+    /**
+     * Adds the player's guess to the list of player guesses. If the player's guess is already in the list of player guesses, it will return false.
+     * @param wordGuess The player's guess.
+     * @return true if the player's guess was added to the list of player guesses, false if the player's guess is already in the list of player guesses.
+     */
     public boolean addPlayerGuess(String wordGuess) {
         if (!playerGuesses.contains(wordGuess)) {
             playerGuesses.add(wordGuess);
@@ -267,6 +313,10 @@ public class Jotto {
         return false;
     }
 
+    /**
+     * Prints the player's guesses and their corresponding scores. The score is the number of letters in the player's guess that are in the current word.
+     * @param guesses The player's guesses.
+     */
     protected void playerGuessScores(ArrayList<String> guesses) {
         System.out.println("Guess\tScore");
         for (String guess : guesses) {
